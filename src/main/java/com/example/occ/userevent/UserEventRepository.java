@@ -15,5 +15,7 @@ public interface UserEventRepository extends JpaRepository<UserEvent, Integer> {
 
     List<UserEvent> findByEvent(EventModel event);
 
+   
+
 
 }

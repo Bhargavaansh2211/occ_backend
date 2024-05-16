@@ -1,5 +1,6 @@
 package com.example.occ.userevent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,13 +28,13 @@ public class UserEventService {
 
     @Transactional
     public void registerUserToEvent(int userId, int eventId) {
-        // Retrieve user and event from repositories
+       
         UserModel user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
         EventModel event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new IllegalArgumentException("Event not found with id: " + eventId));
 
-        // Check if the user is already registered for the event
+       
         boolean isUserRegistered = userEventRepository.existsByUserAndEvent(user, event);
         if (isUserRegistered) {
             throw new IllegalArgumentException("User is already registered for the event");
@@ -67,6 +68,21 @@ public class UserEventService {
         }
 
         userEventRepository.delete(userEvent);
+    }
+
+    public List<UserSub> getRegisteredUsersForEvent(int eventId) {
+        List<UserSub> registeredUsers = new ArrayList<>();
+
+        EventModel event = eventRepository.findByEventId(eventId);
+        List<UserEvent> userEvents = userEventRepository.findByEvent(event);
+
+        
+        for (UserEvent userEvent : userEvents) {
+            UserModel user = userEvent.getUser();
+            registeredUsers.add(new UserSub(user.getUserId(), user.getName(), user.getUser_handle()));
+        }
+
+        return registeredUsers;
     }
 
    

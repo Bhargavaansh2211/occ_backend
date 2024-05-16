@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.occ.user.UserModel;
 import com.example.occ.userevent.UserEventService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,5 +63,12 @@ public class RegistrationController {
             return ResponseEntity.status(500).body("Failed to unregister user from event: " + e.getMessage());
         }
     }
+
+    @CrossOrigin
+    @GetMapping("/registeredusers/{eventId}")
+    public List<UserSub> getRegisteredUsersForEvent(@PathVariable int eventId) {
+        return userEventService.getRegisteredUsersForEvent(eventId);
+    }
+    
 
 }
