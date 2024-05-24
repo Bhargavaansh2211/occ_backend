@@ -53,10 +53,6 @@ public class EventModel {
 	private String venue;
 
 	@Column(nullable=false)
-	@NotBlank(message="fees should not be null")
-	private String fees;
-
-	@Column(nullable=false)
 	@NotBlank(message="Start time should not be null")
 	private String start_time;
 	
@@ -72,7 +68,7 @@ public class EventModel {
 	private Date end_date;
 
 	@Lob
-	@Column(columnDefinition = "BLOB")
+	@Column(columnDefinition = "LONGBLOB")
 	private byte[] image;
 	
 	

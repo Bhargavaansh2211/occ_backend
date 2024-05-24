@@ -37,7 +37,6 @@ public class EventController {
         @RequestParam("title") String title,
         @RequestParam("description") String description,
         @RequestParam("venue") String venue,
-        @RequestParam("fees") String fees,
         @RequestParam("start_time") String startTime,
         @RequestParam("end_time") String endTime,
         @RequestParam("start_date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
@@ -52,7 +51,6 @@ public class EventController {
             eventModel.setTitle(title);
             eventModel.setDescription(description);
             eventModel.setVenue(venue);
-            eventModel.setFees(fees);
             eventModel.setStart_time(startTime);
             eventModel.setEnd_time(endTime);
             eventModel.setStart_date(startDate);
